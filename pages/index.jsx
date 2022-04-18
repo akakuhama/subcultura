@@ -6,15 +6,16 @@ import styles from '../styles/teste.module.css'
 export default function Teste(){
 
     const [dados, setDados] = useState({});
-    const [base, setBase] = useState({})
+    const [parametro, setParametro] = useState('');
 
-    
-
-    var urlBase = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v3.0.1/despesas?anoDotacao=2022&mesDotacao=3&codFuncao=13';
+    var urlBase = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v3.0.1/despesas?anoDotacao=2022&mesDotacao=4&codFuncao=13';
     var myHeaders = new Headers({'Authorization': 'Bearer e48808721e758a773ecafba78fcc4e4'});
-    fetch(urlBase, {method: 'GET', headers: myHeaders})
-        .then(resp => resp.json())
-        .then(dados => setDados(dados['lstDespesas']));
+    
+    useEffect(()=>{
+        fetch(urlBase, {method: 'GET', headers: myHeaders})
+            .then(resp => resp.json())
+            .then(dados => setDados(dados['lstDespesas']));
+    }, []);
     
     function escolherDados(val){    
         try{
@@ -22,10 +23,16 @@ export default function Teste(){
         } catch {
             'Carrregando'
         }
-    }
+    };
 
-    
-
+    useEffect(()=>{
+        if (parametro){
+            var url = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v3.0.1/despesas?anoDotacao=2022&mesDotacao=4&' + parametro;
+            fetch(url, {method: 'GET', headers: myHeaders})
+            .then(r=>r.json())
+            .then(dados => setDados(dados['lstDespesas']));
+        }
+    }, [parametro]);
     
     
 
@@ -34,13 +41,12 @@ export default function Teste(){
             <h1>Função Cultura</h1>
             <div className={styles.linha}>
                 <div style={{margin: '10px'}}>
-                    <select name="Selecionar Itens" id="dropdown" placeholder='Selecione um projeto'>
-                        <option value="13">Função Cultura</option>
-                        <option value="25">Secretaria Municipal de Cultura</option>
-                        <option value="??">Theatro Municipal</option>
-                        <option value="???">SPCine</option>
+                    <select onChange={e=> setParametro(e.target.value)} name="Selecionar Itens" id="dropdown" placeholder='Selecione um projeto'>
+                        <option value="codFuncao=13">Função Cultura</option>
+                        <option value="codOrgao=25">Secretaria Municipal de Cultura</option>
+                        <option value="codOrgao=85">Theatro Municipal</option>
+                        <option value="codOrgao=15">SPCine</option>
                     </select>
-                    <button >Consultar</button>
                 </div>
             </div>
            <div className={styles.linha}>
