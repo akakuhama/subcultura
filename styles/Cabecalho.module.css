@@ -1,0 +1,19 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+}
+.titulo h2{
+    margin-top: 0;
+}
+.titulo h1{
+    margin-bottom: 10px;
+}
