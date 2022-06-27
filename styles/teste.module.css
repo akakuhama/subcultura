@@ -4,7 +4,22 @@
     width: 100%;
     flex-wrap: wrap;
 }
+.coluna{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 15px;
+
+}
 .mover{
     transition: 2s;
     transform: translateX(200px);
+}
+.chart{
+    margin: 10px;
+    height: 45%;
+    width: 45%;
+    min-width: 400px;
 }

@@ -10,6 +10,8 @@ export default function Layout(props){
             <div className={styles.corpo}>
                 {props.children}
             </div>
+            <div className={styles.footer}>
+            </div>
         </div>
     )
 }
